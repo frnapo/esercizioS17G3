@@ -1,0 +1,32 @@
+﻿@model Scarpe.Models.Prodotti
+
+@{
+    ViewBag.Title = "Dettagli";
+}
+
+
+<h2>Dettagli</h2>
+
+<div>
+    <h4>Prodotti</h4>
+    <hr />
+    <div class="row">
+        <div class="col-6">
+            <img src="@Model.Immagine1" alt="product-image">
+            <img src="@Model.Immagine2" alt="product-image">
+            <img src="@Model.Immagine3" alt="product-image">
+        </div>
+
+        <div class="col-6">
+            <h3>@Model.Nome</h3>
+            <p>@Model.Descrizione</p>
+            <p>@Model.Prezzo</p>
+        </div>
+
+    </div>
+
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

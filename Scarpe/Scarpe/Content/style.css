@@ -1,0 +1,22 @@
+﻿@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900");
+
+body {
+    font-family: "Poppins", sans-serif;
+}
+
+h2 {
+
+    font-family: "Poppins", sans-serif;
+    font-weight: 800;
+    font-size: 34px;
+    line-height: 1.2;
+}
+
+
+p {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.7;
+    color:#EE6318 
+}
