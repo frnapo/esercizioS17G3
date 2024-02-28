@@ -11,5 +11,7 @@
         public string Immagine2 { get; set; }
 
         public string Immagine3 { get; set; }
+
+        public bool InVetrina { get; set; }
     }
 }

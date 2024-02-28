@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Scarpe.Models.Prodotti>
+
+@{
+    ViewBag.Title = "Gestione";
+}
+
+<h2 class="text-center">Gestione</h2>
+
+<p>
+    @Html.ActionLink("Aggiungi prodotto", "Create", new { }, new {@class = "btn btn-success" }) 
+</p>
+<table class="table">
+
+<tr>
+        <th>
+            Nome
+        </th>
+        <th>
+            Descrizione
+        </th>
+        <th>
+            Prezzo
+        </th>
+        <th>
+            Img1
+        </th>
+        <th>
+            Img2
+        </th>
+        <th>
+            Img3
+        </th>
+        <th>
+            Mostra
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <h2 class="fs-5">@item.Nome</h2>
+        </td>
+        <td>
+            <p style="width: 250px">@item.Descrizione</p>
+        </td>
+        <td>
+            <p>@item.Prezzo €</p>
+        </td>
+        <td>
+            <img src=".@item.Immagine1" alt="img1" style="width: 150px"/> 
+        </td>
+        <td>
+            <img src=".@item.Immagine2" alt="img2" style="width: 150px"/>
+        </td>
+        <td>
+            <img src=".@item.Immagine3" alt="img3" style="width: 150px"/>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InVetrina)
+        </td>
+        <td>
+            @Html.ActionLink("Modifica", "EditProd", new { id = item.ID }, new { @class = "btn btn-primary mb-2" })
+            @if (item.InVetrina == false)
+            {
+                @Html.ActionLink("Mostra", "AddProd", new { id = item.ID }, new { @class = "btn btn-success" })
+            }
+            else
+            {
+                @Html.ActionLink("Rimuovi", "DeleteProd", new { id = item.ID }, new { @class = "btn btn-warning" })
+            }
+        </td>
+    </tr>
+}
+
+</table>

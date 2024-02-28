@@ -4,17 +4,17 @@
     ViewBag.Title = "Dettagli";
 }
 
+<span class="fs-6">@Html.ActionLink("Indietro", "Index")</span>
 
 <h2>Dettagli</h2>
 
 <div>
-    <h4>Prodotti</h4>
     <hr />
     <div class="row">
         <div class="col-6">
-            <img src="@Model.Immagine1" alt="product-image">
-            <img src="@Model.Immagine2" alt="product-image">
-            <img src="@Model.Immagine3" alt="product-image">
+            <img src="../.@Model.Immagine1" alt="product-image" style="width: 300px">
+            <img src="../.@Model.Immagine2" alt="product-image" style="width: 300px">
+            <img src="../.@Model.Immagine3" alt="product-image" style="width: 300px">
         </div>
 
         <div class="col-6">
@@ -26,7 +26,6 @@
     </div>
 
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+
+
