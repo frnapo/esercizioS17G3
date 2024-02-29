@@ -154,6 +154,9 @@
     <Content Include="Content\imgs\3.jpg" />
     <Content Include="Content\imgs\3alt1.jpg" />
     <Content Include="Content\imgs\3alt2.jpg" />
+    <Content Include="Content\imgs\a.jpg" />
+    <Content Include="Content\imgs\b.jpg" />
+    <Content Include="Content\imgs\c.jpg" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -192,6 +195,7 @@
     <Content Include="Views\Home\Dettagli.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Gestione.cshtml" />
+    <Content Include="Views\Home\AggiungiArticolo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

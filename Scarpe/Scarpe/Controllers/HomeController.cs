@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Scarpe.Controllers
@@ -56,6 +58,7 @@ namespace Scarpe.Controllers
             string connectionString = ConfigurationManager.ConnectionStrings["Scarpe"].ConnectionString.ToString();
             SqlConnection conn = new SqlConnection(connectionString);
             Prodotti prodotto = new Prodotti();
+
             try
             {
                 conn.Open();
@@ -88,7 +91,64 @@ namespace Scarpe.Controllers
             return View(prodotto);
         }
 
+        public ActionResult AggiungiArticolo()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult AggiungiArticolo(Prodotti prodotto, HttpPostedFileBase file1, HttpPostedFileBase file2, HttpPostedFileBase file3)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["Scarpe"].ConnectionString.ToString();
+            SqlConnection conn = new SqlConnection(connectionString);
 
+            if (file1 != null && file1.ContentLength > 0)
+            {
+                string _FileName = Path.GetFileName(file1.FileName);
+                string _path = Path.Combine(Server.MapPath("~/Content/imgs/"), _FileName);
+                file1.SaveAs(_path);
+                prodotto.Immagine1 = _path;
+            }
+            if (file2 != null && file2.ContentLength > 0)
+            {
+                string _FileName = Path.GetFileName(file2.FileName);
+                string _path = Path.Combine(Server.MapPath("~/Content/imgs/"), _FileName);
+                file2.SaveAs(_path);
+                prodotto.Immagine2 = _path;
+            }
+            if (file3 != null && file3.ContentLength > 0)
+            {
+                string _FileName = Path.GetFileName(file3.FileName);
+                string _path = Path.Combine(Server.MapPath("~/Content/imgs/"), _FileName);
+                file3.SaveAs(_path);
+                prodotto.Immagine3 = _path;
+            }
+            try
+            {
+                conn.Open();
+                string query = "INSERT INTO Articoli (Nome, Descrizione, Prezzo, imgPath, imgAlt1, imgAlt2, Visibile)" +
+                    " VALUES (@Nome, @Descrizione, @Prezzo, @imgPath, @imgAlt1, @imgAlt2, @Visibile)";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@Nome", prodotto.Nome);
+                cmd.Parameters.AddWithValue("@Descrizione", prodotto.Descrizione);
+                cmd.Parameters.AddWithValue("@Prezzo", prodotto.Prezzo);
+                cmd.Parameters.AddWithValue("@imgPath", prodotto.Immagine1);
+                cmd.Parameters.AddWithValue("@imgAlt1", prodotto.Immagine2);
+                cmd.Parameters.AddWithValue("@imgAlt2", prodotto.Immagine3);
+                cmd.Parameters.AddWithValue("@Visibile", prodotto.InVetrina);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Response.Write("Error: ");
+                Response.Write(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return RedirectToAction("Index");
+        }
 
 
         public ActionResult Gestione()
@@ -154,7 +214,7 @@ namespace Scarpe.Controllers
             {
                 conn.Close();
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Gestione");
         }
 
         public ActionResult AddProd(int id)
@@ -177,9 +237,8 @@ namespace Scarpe.Controllers
             {
                 conn.Close();
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Gestione");
         }
-
 
 
 
